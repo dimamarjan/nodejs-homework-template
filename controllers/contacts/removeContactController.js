@@ -1,4 +1,4 @@
-const { removeContactModel } = require('../model')
+const { removeContactModel } = require('../../model')
 
 const removeContactController = async (req, res, next) => {
   try {
