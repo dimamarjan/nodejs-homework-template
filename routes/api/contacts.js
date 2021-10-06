@@ -14,15 +14,14 @@ const {
   contactValidatorFavoriteChanges
 } = require('../../middlewares/validations')
 
-router.get('/', listContactsController)
+router
+  .get('/', listContactsController)
+  .post('/', contactValidator, addContactController)
 
-router.get('/:contactId', getContactByIdController)
-
-router.post('/', contactValidator, addContactController)
-
-router.delete('/:contactId', removeContactController)
-
-router.put('/:contactId', contactValidatorChanges, changeContactController)
+router
+  .get('/:contactId', getContactByIdController)
+  .delete('/:contactId', removeContactController)
+  .put('/:contactId', contactValidatorChanges, changeContactController)
 
 router.patch('/:contactId/favorite', contactValidatorFavoriteChanges, updateStatusContactController)
 
