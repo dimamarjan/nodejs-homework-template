@@ -1,12 +1,13 @@
 const { removeContactModel } = require('../../model')
+const { OK } = require('../../helpers/constants')
 
 const removeContactController = async (req, res, next) => {
   try {
+    const userId = req.user.id
     const { contactId } = req.params
-    await removeContactModel(contactId)
+    await removeContactModel(userId, contactId)
     return res
-      .status(201)
-      .json({ status: 'succsess', code: 200, message: 'contact deleted' })
+      .json({ status: 'succsess', code: OK, message: 'contact deleted' })
   } catch (err) {
     next(err)
   }

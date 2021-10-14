@@ -1,15 +1,19 @@
 const Contact = require('../../schemas/contacts')
+const { NOT_FOUND } = require('../../helpers/constants')
 
-const updateStatusContactModel = async (contactId, body) => {
+const updateStatusContactModel = async (userId, contactId, body) => {
   try {
     const contact = await Contact.findByIdAndUpdate(
-      { _id: contactId },
+      { _id: contactId, owner: userId },
       { favorite: body },
       { new: true }
-    )
+    ).populate({
+      path: 'owner',
+      select: 'email subscription -_id'
+    })
     return contact
   } catch {
-    throw new Error('404')
+    throw new Error(NOT_FOUND)
   }
 }
 
