@@ -3,6 +3,7 @@ const logger = require('morgan')
 const cors = require('cors')
 const helmet = require('helmet')
 const ratelimit = require('express-rate-limit')
+const boolParser = require('express-query-boolean')
 
 const HttpCodes = require('./helpers/constants')
 const limitRateOptions = require('./helpers/limitRateOptions')
@@ -15,6 +16,7 @@ app.use(helmet())
 app.use(logger(formatsLogger))
 app.use(cors())
 app.use(express.json({ limit: 10000 }))
+app.use(boolParser())
 
 app.use('/api/', ratelimit(limitRateOptions))
 
@@ -35,6 +37,10 @@ app.use((err, req, res, next) => {
       .status(HttpCodes.SERVER_ERR)
       .json({ status: 'error', code: HttpCodes.SERVER_ERR, message: err.message })
   }
+})
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.log('Unhandled Rejection at:', promise, 'reason:', reason)
 })
 
 module.exports = app
