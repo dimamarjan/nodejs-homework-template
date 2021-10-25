@@ -9,6 +9,7 @@ const createUserModel = require('./users/createUserModel')
 const getUserByIdModel = require('./users/getUserByIdModel')
 const getUserByEmailModel = require('./users/getUserByEmailModel')
 const updateUserTokenModel = require('./users/updateUserTokenModel')
+const updateUserAvatarModel = require('./users/updateUserAvatarModel')
 
 module.exports = {
   listContactsModel,
@@ -21,5 +22,6 @@ module.exports = {
   createUserModel,
   getUserByIdModel,
   getUserByEmailModel,
-  updateUserTokenModel
+  updateUserTokenModel,
+  updateUserAvatarModel
 }

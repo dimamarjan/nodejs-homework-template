@@ -9,6 +9,7 @@ const singupUserController = require('./users/singupUserController')
 const loginUserController = require('./users/loginUserController')
 const logoutUserController = require('./users/logoutUserController')
 const currentUserController = require('./users/currentUserController')
+const avatarUserController = require('./users/avatarUserController')
 
 module.exports = {
   listContactsController,
@@ -21,5 +22,6 @@ module.exports = {
   singupUserController,
   loginUserController,
   logoutUserController,
-  currentUserController
+  currentUserController,
+  avatarUserController
 }
