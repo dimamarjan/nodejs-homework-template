@@ -12,6 +12,7 @@ const pathToAvatarFolder = path.join(__dirname, '..', 'public', USERS_AVATAR)
 
 db.then(() => {
   app.listen(PORT, async () => {
+    await createAvatarFolder('public')
     await createAvatarFolder(UPLOAD_DIR)
     await createAvatarFolder(pathToAvatarFolder)
     console.log(`Server running. Use our API on port: ${PORT}`)
