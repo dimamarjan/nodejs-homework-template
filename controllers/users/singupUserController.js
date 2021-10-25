@@ -21,7 +21,8 @@ const createUserController = async (req, res, next) => {
         code: CREATED,
         user: {
           email: createdUser.email,
-          subscription: createdUser.subscription
+          subscription: createdUser.subscription,
+          avatar: createdUser.avatarURL
         }
       })
   } catch (err) {

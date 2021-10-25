@@ -4,15 +4,19 @@ const cors = require('cors')
 const helmet = require('helmet')
 const ratelimit = require('express-rate-limit')
 const boolParser = require('express-query-boolean')
+const path = require('path')
 
 const HttpCodes = require('./helpers/constants')
 const limitRateOptions = require('./helpers/limitRateOptions')
+require('dotenv').config()
+const USERS_AVATAR = process.env.USERS_AVATAR
 
 const app = express()
 
 const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short'
 
 app.use(helmet())
+app.use(express.static(path.join(__dirname, 'public', USERS_AVATAR)))
 app.use(logger(formatsLogger))
 app.use(cors())
 app.use(express.json({ limit: 10000 }))

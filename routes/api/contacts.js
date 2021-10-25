@@ -1,29 +1,18 @@
 const express = require('express')
 const router = express.Router()
-const {
-  listContactsController,
-  getContactByIdController,
-  addContactController,
-  removeContactController,
-  changeContactController,
-  updateStatusContactController
-} = require('../../controllers')
-const {
-  contactValidator,
-  contactValidatorChanges,
-  contactValidatorFavoriteChanges
-} = require('../../middlewares/validations')
+const controllers = require('../../controllers')
+const validators = require('../../middlewares/validations')
 const guard = require('../../helpers/guard')
 
 router
-  .get('/', guard, listContactsController)
-  .post('/', guard, contactValidator, addContactController)
+  .get('/', guard, controllers.listContactsController)
+  .post('/', guard, validators.contactValidator, controllers.addContactController)
 
 router
-  .get('/:contactId', guard, getContactByIdController)
-  .delete('/:contactId', guard, removeContactController)
-  .put('/:contactId', guard, contactValidatorChanges, changeContactController)
+  .get('/:contactId', guard, controllers.getContactByIdController)
+  .delete('/:contactId', guard, controllers.removeContactController)
+  .put('/:contactId', guard, validators.contactValidatorChanges, controllers.changeContactController)
 
-router.patch('/:contactId/favorite', guard, contactValidatorFavoriteChanges, updateStatusContactController)
+router.patch('/:contactId/favorite', guard, validators.contactValidatorFavoriteChanges, controllers.updateStatusContactController)
 
 module.exports = router
